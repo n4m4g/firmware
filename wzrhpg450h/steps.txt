@@ -1,0 +1,8 @@
+1. strip off the first section of the encrypted firmware -- up to the second "start" string
+    dd if=in.enc of=in_stripped.enc bs=208 skip=1
+
+2. Compile the decryptor
+    gcc -o bufdec buffalo-enc.c buffalo-lib.c
+
+3. Use the decryptor to decrypt the beheaded, encrypted firmware
+    ./bufdec -d -i in_stripped.enc -o buffalo-fw.img
